@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:footrade_mvvm/views/register_view.dart';
 
 import 'views/login_view.dart';
 
@@ -19,9 +20,9 @@ class MyApp extends StatelessWidget {
       initialRoute: 'login',
       routes: {
         'login': (context) => LoginView(),
-        //'home': (context) => HomePage(),
-        //'register': (context) => RegisterPage(),
-        //'preference': (context) => PreferencePage(),
+        'register': (context) => RegisterView(),
+        //'home': (context) => HomeView(),
+        //'preference': (context) => PreferenceView(),
       },
     );
   }

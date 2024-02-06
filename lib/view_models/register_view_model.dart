@@ -4,28 +4,34 @@ import '../models/user_model.dart';
 import '../services/api_service.dart';
 import '../services/storage_service.dart';
 
-class LoginViewModel extends ChangeNotifier {
+class RegisterViewModel extends ChangeNotifier {
   final ApiService apiService = ApiService();
 
   final TextEditingController usernameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
   bool obscurePassword = true;
+  bool obscureConfirmPassword = true;
 
   final Function(String) navigateTo;
 
-  LoginViewModel({required this.navigateTo});
+  RegisterViewModel({required this.navigateTo});
 
   @override
   void dispose() {
     usernameController.dispose();
+    emailController.dispose();
     passwordController.dispose();
+    confirmPasswordController.dispose();
     super.dispose();
   }
 
-  Future<void> loginUser(BuildContext context) async {
+  Future<void> registerUser(BuildContext context) async {
     try {
-      final UserModel userModel = await apiService.loginUser(
+      final UserModel userModel = await apiService.registerUser(
         usernameController.text,
+        emailController.text,
         passwordController.text,
       );
 
@@ -46,8 +52,6 @@ class LoginViewModel extends ChangeNotifier {
         // For testing purposes, just print the user's hasPreference value
         print(userModel.hasPreference);
       }
-
-
     } catch (e) {
       Navigator.pop(context);
       // Show an error popup
@@ -56,12 +60,18 @@ class LoginViewModel extends ChangeNotifier {
     }
   }
 
-  void registerNavigation() {
-    navigateTo('register');
+
+  void loginNavigation() {
+    navigateTo('login');
   }
 
   void togglePasswordVisibility() {
     obscurePassword = !obscurePassword;
+    notifyListeners();
+  }
+
+  void toggleConfirmPasswordVisibility() {
+    obscureConfirmPassword = !obscureConfirmPassword;
     notifyListeners();
   }
 
@@ -72,9 +82,26 @@ class LoginViewModel extends ChangeNotifier {
     return null;
   }
 
+  String? validateEmail(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your email';
+    }
+    return null;
+  }
+
   String? validatePassword(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter your password';
+    }
+    return null;
+  }
+
+  String? validateConfirmPassword(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please confirm your password';
+    }
+    if (value != passwordController.text) {
+      return 'Passwords do not match';
     }
     return null;
   }
