@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../constants/app_colors.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
@@ -18,14 +19,14 @@ class CustomButton extends StatelessWidget {
         padding: const EdgeInsets.all(15),
         margin: const EdgeInsets.symmetric(horizontal: 75),
         decoration: BoxDecoration(
-          color: Colors.blue,
+          color: AppColors.blue,
           borderRadius: BorderRadius.circular(16),
         ),
         child: Center(
           child: Text(
             text,
             style: const TextStyle(
-              color: Colors.white,
+              color: AppColors.white,
               fontWeight: FontWeight.bold,
               fontSize: 16,
             ),
