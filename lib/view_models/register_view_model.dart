@@ -4,6 +4,7 @@ import '../components/custom_error_snackbar.dart';
 import '../models/user_model.dart';
 import '../services/api_service.dart';
 import '../services/storage_service.dart';
+import '../constants/app_strings.dart';
 
 class RegisterViewModel extends ChangeNotifier {
   final ApiService apiService = ApiService();
@@ -81,31 +82,31 @@ class RegisterViewModel extends ChangeNotifier {
 
   String? validateUsername(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please enter your username';
+      return AppStrings.usernameEmpty;
     }
     return null;
   }
 
   String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please enter your email';
+      return AppStrings.emailEmpty;
     }
     return null;
   }
 
   String? validatePassword(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please enter your password';
+      return AppStrings.passwordEmpty;
     }
     return null;
   }
 
   String? validateConfirmPassword(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please confirm your password';
+      return AppStrings.passwordRepeatEmpty;
     }
     if (value != passwordController.text) {
-      return 'Passwords do not match';
+      return AppStrings.passwordMismatch;
     }
     return null;
   }

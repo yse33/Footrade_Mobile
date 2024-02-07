@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../view_models/login_view_model.dart';
 import '../components/custom_button.dart';
+import '../constants/app_strings.dart';
 
 class LoginView extends StatelessWidget {
   LoginView({super.key});
@@ -45,7 +46,7 @@ class LoginView extends StatelessWidget {
                             child: TextFormField(
                               controller: viewModel.usernameController,
                               decoration: InputDecoration(
-                                labelText: 'Username',
+                                labelText: AppStrings.usernameLabel,
                                 prefixIcon: const Icon(Icons.person),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
@@ -62,7 +63,7 @@ class LoginView extends StatelessWidget {
                             child: TextFormField(
                               controller: viewModel.passwordController,
                               decoration: InputDecoration(
-                                labelText: 'Password',
+                                labelText: AppStrings.passwordLabel,
                                 prefixIcon: const Icon(Icons.lock),
                                 suffixIcon: IconButton(
                                   icon: Icon(
@@ -90,7 +91,7 @@ class LoginView extends StatelessWidget {
                               // TODO: Implement forgot password
                             },
                             child: Text(
-                              'Forgot password?',
+                              AppStrings.forgotPassword,
                               style: TextStyle(
                                 color: Colors.grey[700],
                               ),
@@ -100,7 +101,7 @@ class LoginView extends StatelessWidget {
                           const SizedBox(height: 25),
 
                           CustomButton(
-                            text: 'Login',
+                            text: AppStrings.loginButton,
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
                                 showDialog(
@@ -123,7 +124,7 @@ class LoginView extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                'Don\'t have an account?',
+                                AppStrings.promptRegister,
                                 style: TextStyle(color: Colors.grey[700]),
                               ),
 
@@ -134,7 +135,7 @@ class LoginView extends StatelessWidget {
                                   viewModel.registerNavigation();
                                 },
                                 child: const Text(
-                                  'Register now',
+                                  AppStrings.registerText,
                                   style: TextStyle(
                                     color: Colors.blue,
                                     fontWeight: FontWeight.bold,

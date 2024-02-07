@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../view_models/register_view_model.dart';
 import '../components/custom_button.dart';
+import '../constants/app_strings.dart';
 
 class RegisterView extends StatelessWidget {
   RegisterView({super.key});
@@ -45,7 +46,7 @@ class RegisterView extends StatelessWidget {
                           child: TextFormField(
                             controller: viewModel.usernameController,
                             decoration: InputDecoration(
-                              labelText: 'Username',
+                              labelText: AppStrings.usernameLabel,
                               prefixIcon: const Icon(Icons.person),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
@@ -62,7 +63,7 @@ class RegisterView extends StatelessWidget {
                           child: TextFormField(
                             controller: viewModel.emailController,
                             decoration: InputDecoration(
-                              labelText: 'Your Email',
+                              labelText: AppStrings.emailLabel,
                               prefixIcon: const Icon(Icons.email),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
@@ -79,7 +80,7 @@ class RegisterView extends StatelessWidget {
                           child: TextFormField(
                             controller: viewModel.passwordController,
                             decoration: InputDecoration(
-                              labelText: 'Password',
+                              labelText: AppStrings.passwordLabel,
                               prefixIcon: const Icon(Icons.lock),
                               suffixIcon: IconButton(
                                 icon: Icon(
@@ -107,7 +108,7 @@ class RegisterView extends StatelessWidget {
                           child: TextFormField(
                             controller: viewModel.confirmPasswordController,
                             decoration: InputDecoration(
-                              labelText: 'Repeat your password',
+                              labelText: AppStrings.passwordRepeatLabel,
                               prefixIcon: const Icon(Icons.key),
                               suffixIcon: IconButton(
                                 icon: Icon(
@@ -131,7 +132,7 @@ class RegisterView extends StatelessWidget {
                         const SizedBox(height: 25),
 
                         CustomButton(
-                          text: 'Register',
+                          text: AppStrings.registerButton,
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               showDialog(
@@ -154,7 +155,7 @@ class RegisterView extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'Already have an account?',
+                              AppStrings.promptLogin,
                               style: TextStyle(color: Colors.grey[700]),
                             ),
 
@@ -165,7 +166,7 @@ class RegisterView extends StatelessWidget {
                                 viewModel.loginNavigation();
                               },
                               child: const Text(
-                                'Log in',
+                                AppStrings.loginText,
                                 style: TextStyle(
                                   color: Colors.blue,
                                   fontWeight: FontWeight.bold,

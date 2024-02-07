@@ -4,6 +4,7 @@ import '../components/custom_error_snackbar.dart';
 import '../models/user_model.dart';
 import '../services/api_service.dart';
 import '../services/storage_service.dart';
+import '../constants/app_strings.dart';
 
 class LoginViewModel extends ChangeNotifier {
   final ApiService apiService = ApiService();
@@ -71,14 +72,14 @@ class LoginViewModel extends ChangeNotifier {
 
   String? validateUsername(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please enter your username';
+      return AppStrings.usernameEmpty;
     }
     return null;
   }
 
   String? validatePassword(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please enter your password';
+      return AppStrings.passwordEmpty;
     }
     return null;
   }
