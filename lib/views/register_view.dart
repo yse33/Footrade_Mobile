@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:footrade_mvvm/components/custom_logo.dart';
 import 'package:provider/provider.dart';
 
 import '../view_models/register_view_model.dart';
@@ -6,6 +7,7 @@ import '../components/custom_button.dart';
 import '../components/custom_textfield.dart';
 import '../constants/app_strings.dart';
 import '../constants/app_colors.dart';
+import '../constants/app_dimensions.dart';
 
 class RegisterView extends StatelessWidget {
   RegisterView({super.key});
@@ -32,16 +34,9 @@ class RegisterView extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.9,
-                          height: MediaQuery.of(context).size.height * 0.1,
-                          child: Image.asset(
-                            'assets/logo-transparent.png',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+                        const CustomLogo(),
 
-                        const SizedBox(height: 25),
+                        const SizedBox(height: AppDimensions.mediumSizedBox),
 
                         CustomTextField(
                           controller: viewModel.usernameController,
@@ -52,7 +47,7 @@ class RegisterView extends StatelessWidget {
                           onPressed: null,
                         ),
 
-                        const SizedBox(height: 10),
+                        const SizedBox(height: AppDimensions.smallSizedBox),
 
                         CustomTextField(
                           controller: viewModel.emailController,
@@ -63,7 +58,7 @@ class RegisterView extends StatelessWidget {
                           onPressed: null,
                         ),
 
-                        const SizedBox(height: 10),
+                        const SizedBox(height: AppDimensions.smallSizedBox),
 
                         CustomTextField(
                           controller: viewModel.passwordController,
@@ -74,7 +69,7 @@ class RegisterView extends StatelessWidget {
                           onPressed: viewModel.togglePasswordVisibility,
                         ),
 
-                        const SizedBox(height: 10),
+                        const SizedBox(height: AppDimensions.smallSizedBox),
 
                         CustomTextField(
                           controller: viewModel.confirmPasswordController,
@@ -85,7 +80,7 @@ class RegisterView extends StatelessWidget {
                           onPressed: viewModel.toggleConfirmPasswordVisibility,
                         ),
 
-                        const SizedBox(height: 25),
+                        const SizedBox(height: AppDimensions.mediumSizedBox),
 
                         CustomButton(
                           text: AppStrings.registerButton,
@@ -105,7 +100,7 @@ class RegisterView extends StatelessWidget {
                           },
                         ),
 
-                        const SizedBox(height: 25),
+                        const SizedBox(height: AppDimensions.mediumSizedBox),
 
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -115,7 +110,7 @@ class RegisterView extends StatelessWidget {
                               style: TextStyle(color: AppColors.grey),
                             ),
 
-                            const SizedBox(width: 4),
+                            const SizedBox(width: AppDimensions.smallSizedBox),
 
                             TextButton(
                               onPressed: () {
