@@ -8,6 +8,7 @@ import '../components/custom_logo.dart';
 import '../constants/app_strings.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_dimensions.dart';
+import '../constants/app_icons.dart';
 
 class LoginView extends StatelessWidget {
   LoginView({super.key});
@@ -43,7 +44,7 @@ class LoginView extends StatelessWidget {
                           CustomTextField(
                             controller: viewModel.usernameController,
                             labelText: AppStrings.usernameLabel,
-                            prefixIcon: const Icon(Icons.person),
+                            prefixIcon: AppIcons.username,
                             obscureText: false,
                             validator: viewModel.validateUsername,
                             onPressed: null,
@@ -54,7 +55,7 @@ class LoginView extends StatelessWidget {
                           CustomTextField(
                             controller: viewModel.passwordController,
                             labelText: AppStrings.passwordLabel,
-                            prefixIcon: const Icon(Icons.lock),
+                            prefixIcon: AppIcons.password,
                             obscureText: viewModel.obscurePassword,
                             validator: viewModel.validatePassword,
                             onPressed: viewModel.togglePasswordVisibility,

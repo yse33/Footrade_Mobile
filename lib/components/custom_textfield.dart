@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import '../constants/app_icons.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final String labelText;
-  final Icon prefixIcon;
+  final IconData prefixIcon;
   final bool obscureText;
   final String? Function(String?) validator;
   final void Function()? onPressed;
@@ -26,10 +27,10 @@ class CustomTextField extends StatelessWidget {
         controller: controller,
         decoration: InputDecoration(
           labelText: labelText,
-          prefixIcon: prefixIcon,
+          prefixIcon: Icon(prefixIcon),
           suffixIcon: onPressed != null ? IconButton(
             icon: Icon(
-              obscureText ? Icons.visibility : Icons.visibility_off,
+              obscureText ? AppIcons.visibility : AppIcons.visibilityOff,
             ),
             onPressed: onPressed,
           ) : null,

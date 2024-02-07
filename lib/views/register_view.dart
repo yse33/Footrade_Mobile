@@ -8,6 +8,7 @@ import '../components/custom_textfield.dart';
 import '../constants/app_strings.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_dimensions.dart';
+import '../constants/app_icons.dart';
 
 class RegisterView extends StatelessWidget {
   RegisterView({super.key});
@@ -19,7 +20,9 @@ class RegisterView extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1),
+          padding: EdgeInsets.only(
+              top: MediaQuery.of(context).size.height * AppDimensions.standardPaddingMultiplier
+          ),
           child: Center(
             child: ChangeNotifierProvider(
               create: (context) => RegisterViewModel(
@@ -41,7 +44,7 @@ class RegisterView extends StatelessWidget {
                         CustomTextField(
                           controller: viewModel.usernameController,
                           labelText: AppStrings.usernameLabel,
-                          prefixIcon: const Icon(Icons.person),
+                          prefixIcon: AppIcons.username,
                           obscureText: false,
                           validator: viewModel.validateUsername,
                           onPressed: null,
@@ -52,7 +55,7 @@ class RegisterView extends StatelessWidget {
                         CustomTextField(
                           controller: viewModel.emailController,
                           labelText: AppStrings.emailLabel,
-                          prefixIcon: const Icon(Icons.email),
+                          prefixIcon: AppIcons.email,
                           obscureText: false,
                           validator: viewModel.validateEmail,
                           onPressed: null,
@@ -63,7 +66,7 @@ class RegisterView extends StatelessWidget {
                         CustomTextField(
                           controller: viewModel.passwordController,
                           labelText: AppStrings.passwordLabel,
-                          prefixIcon: const Icon(Icons.lock),
+                          prefixIcon: AppIcons.password,
                           obscureText: viewModel.obscurePassword,
                           validator: viewModel.validatePassword,
                           onPressed: viewModel.togglePasswordVisibility,
@@ -74,7 +77,7 @@ class RegisterView extends StatelessWidget {
                         CustomTextField(
                           controller: viewModel.confirmPasswordController,
                           labelText: AppStrings.passwordRepeatLabel,
-                          prefixIcon: const Icon(Icons.lock),
+                          prefixIcon: AppIcons.password,
                           obscureText: viewModel.obscureConfirmPassword,
                           validator: viewModel.validateConfirmPassword,
                           onPressed: viewModel.toggleConfirmPasswordVisibility,
