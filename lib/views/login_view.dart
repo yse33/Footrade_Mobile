@@ -3,7 +3,9 @@ import 'package:provider/provider.dart';
 
 import '../view_models/login_view_model.dart';
 import '../components/custom_button.dart';
+import '../components/custom_textfield.dart';
 import '../constants/app_strings.dart';
+import '../constants/app_colors.dart';
 
 class LoginView extends StatelessWidget {
   LoginView({super.key});
@@ -41,47 +43,24 @@ class LoginView extends StatelessWidget {
 
                           const SizedBox(height: 25),
 
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.8,
-                            child: TextFormField(
-                              controller: viewModel.usernameController,
-                              decoration: InputDecoration(
-                                labelText: AppStrings.usernameLabel,
-                                prefixIcon: const Icon(Icons.person),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
-                              validator: viewModel.validateUsername,
-                            ),
+                          CustomTextField(
+                            controller: viewModel.usernameController,
+                            labelText: AppStrings.usernameLabel,
+                            prefixIcon: const Icon(Icons.person),
+                            obscureText: false,
+                            validator: viewModel.validateUsername,
+                            onPressed: null,
                           ),
 
                           const SizedBox(height: 10),
 
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.8,
-                            child: TextFormField(
-                              controller: viewModel.passwordController,
-                              decoration: InputDecoration(
-                                labelText: AppStrings.passwordLabel,
-                                prefixIcon: const Icon(Icons.lock),
-                                suffixIcon: IconButton(
-                                  icon: Icon(
-                                    viewModel.obscurePassword
-                                        ? Icons.visibility
-                                        : Icons.visibility_off,
-                                  ),
-                                  onPressed: () {
-                                    viewModel.togglePasswordVisibility();
-                                  },
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
-                              validator: viewModel.validatePassword,
-                              obscureText: viewModel.obscurePassword,
-                            ),
+                          CustomTextField(
+                            controller: viewModel.passwordController,
+                            labelText: AppStrings.passwordLabel,
+                            prefixIcon: const Icon(Icons.lock),
+                            obscureText: viewModel.obscurePassword,
+                            validator: viewModel.validatePassword,
+                            onPressed: viewModel.togglePasswordVisibility,
                           ),
 
                           const SizedBox(height: 15),
@@ -90,10 +69,10 @@ class LoginView extends StatelessWidget {
                             onTap: () {
                               // TODO: Implement forgot password
                             },
-                            child: Text(
+                            child: const Text(
                               AppStrings.forgotPassword,
                               style: TextStyle(
-                                color: Colors.grey[700],
+                                color: AppColors.grey,
                               ),
                             ),
                           ),
@@ -123,9 +102,9 @@ class LoginView extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
+                              const Text(
                                 AppStrings.promptRegister,
-                                style: TextStyle(color: Colors.grey[700]),
+                                style: TextStyle(color: AppColors.grey),
                               ),
 
                               const SizedBox(width: 4),
@@ -137,7 +116,7 @@ class LoginView extends StatelessWidget {
                                 child: const Text(
                                   AppStrings.registerText,
                                   style: TextStyle(
-                                    color: Colors.blue,
+                                    color: AppColors.blue,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),

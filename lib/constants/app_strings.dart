@@ -15,4 +15,5 @@ class AppStrings {
   static const String passwordEmpty = 'Please enter your password';
   static const String passwordRepeatEmpty = 'Please repeat your password';
   static const String passwordMismatch = 'Passwords do not match';
+  static const String snackbarErrorTitle = 'Oh no! Something went wrong';
 }

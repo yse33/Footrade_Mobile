@@ -3,7 +3,9 @@ import 'package:provider/provider.dart';
 
 import '../view_models/register_view_model.dart';
 import '../components/custom_button.dart';
+import '../components/custom_textfield.dart';
 import '../constants/app_strings.dart';
+import '../constants/app_colors.dart';
 
 class RegisterView extends StatelessWidget {
   RegisterView({super.key});
@@ -41,92 +43,46 @@ class RegisterView extends StatelessWidget {
 
                         const SizedBox(height: 25),
 
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.8,
-                          child: TextFormField(
-                            controller: viewModel.usernameController,
-                            decoration: InputDecoration(
-                              labelText: AppStrings.usernameLabel,
-                              prefixIcon: const Icon(Icons.person),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            validator: viewModel.validateUsername,
-                          ),
+                        CustomTextField(
+                          controller: viewModel.usernameController,
+                          labelText: AppStrings.usernameLabel,
+                          prefixIcon: const Icon(Icons.person),
+                          obscureText: false,
+                          validator: viewModel.validateUsername,
+                          onPressed: null,
                         ),
 
                         const SizedBox(height: 10),
 
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.8,
-                          child: TextFormField(
-                            controller: viewModel.emailController,
-                            decoration: InputDecoration(
-                              labelText: AppStrings.emailLabel,
-                              prefixIcon: const Icon(Icons.email),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            validator: viewModel.validateEmail,
-                          ),
+                        CustomTextField(
+                          controller: viewModel.emailController,
+                          labelText: AppStrings.emailLabel,
+                          prefixIcon: const Icon(Icons.email),
+                          obscureText: false,
+                          validator: viewModel.validateEmail,
+                          onPressed: null,
                         ),
 
                         const SizedBox(height: 10),
 
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.8,
-                          child: TextFormField(
-                            controller: viewModel.passwordController,
-                            decoration: InputDecoration(
-                              labelText: AppStrings.passwordLabel,
-                              prefixIcon: const Icon(Icons.lock),
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                  viewModel.obscurePassword
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                ),
-                                onPressed: () {
-                                  viewModel.togglePasswordVisibility();
-                                },
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            validator: viewModel.validatePassword,
-                            obscureText: viewModel.obscurePassword,
-                          ),
+                        CustomTextField(
+                          controller: viewModel.passwordController,
+                          labelText: AppStrings.passwordLabel,
+                          prefixIcon: const Icon(Icons.lock),
+                          obscureText: viewModel.obscurePassword,
+                          validator: viewModel.validatePassword,
+                          onPressed: viewModel.togglePasswordVisibility,
                         ),
 
                         const SizedBox(height: 10),
 
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.8,
-                          child: TextFormField(
-                            controller: viewModel.confirmPasswordController,
-                            decoration: InputDecoration(
-                              labelText: AppStrings.passwordRepeatLabel,
-                              prefixIcon: const Icon(Icons.key),
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                  viewModel.obscureConfirmPassword
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                ),
-                                onPressed: () {
-                                  viewModel.toggleConfirmPasswordVisibility();
-                                },
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            validator: viewModel.validateConfirmPassword,
-                            obscureText: viewModel.obscureConfirmPassword,
-                          ),
+                        CustomTextField(
+                          controller: viewModel.confirmPasswordController,
+                          labelText: AppStrings.passwordRepeatLabel,
+                          prefixIcon: const Icon(Icons.lock),
+                          obscureText: viewModel.obscureConfirmPassword,
+                          validator: viewModel.validateConfirmPassword,
+                          onPressed: viewModel.toggleConfirmPasswordVisibility,
                         ),
 
                         const SizedBox(height: 25),
@@ -154,9 +110,9 @@ class RegisterView extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
+                            const Text(
                               AppStrings.promptLogin,
-                              style: TextStyle(color: Colors.grey[700]),
+                              style: TextStyle(color: AppColors.grey),
                             ),
 
                             const SizedBox(width: 4),
@@ -168,7 +124,7 @@ class RegisterView extends StatelessWidget {
                               child: const Text(
                                 AppStrings.loginText,
                                 style: TextStyle(
-                                  color: Colors.blue,
+                                  color: AppColors.blue,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
