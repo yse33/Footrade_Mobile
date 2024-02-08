@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:footrade_mvvm/views/register_view.dart';
 
+import 'views/preference_view.dart';
+import 'views/register_view.dart';
 import 'views/login_view.dart';
 
 void main() async {
@@ -21,8 +22,8 @@ class MyApp extends StatelessWidget {
       routes: {
         'login': (context) => LoginView(),
         'register': (context) => RegisterView(),
+        'preference': (context) => const PreferenceView(),
         //'home': (context) => HomeView(),
-        //'preference': (context) => PreferenceView(),
       },
     );
   }

@@ -7,6 +7,7 @@ class CustomErrorSnackbar extends SnackBar {
     : super(
         key: key,
         elevation: 0,
+        width: double.infinity,
         behavior: SnackBarBehavior.floating,
         backgroundColor: Colors.transparent,
         duration: const Duration(seconds: 3),

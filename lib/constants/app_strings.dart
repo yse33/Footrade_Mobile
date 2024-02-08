@@ -1,4 +1,5 @@
 class AppStrings {
+  // Login and Register
   static const String usernameLabel = 'Username';
   static const String emailLabel = 'Your Email';
   static const String passwordLabel = 'Password';
@@ -16,4 +17,11 @@ class AppStrings {
   static const String passwordRepeatEmpty = 'Please repeat your password';
   static const String passwordMismatch = 'Passwords do not match';
   static const String snackbarErrorTitle = 'Oh no! Something went wrong';
+
+  // Preference
+  static const String sizeDialogTitle = 'Sizes';
+  static const String sizeDialogConfirm = 'OK';
+  static const String brandDialogTitle = 'Pick your favourite brands';
+  static const String sizeButtonText = 'Pick your shoe sizes';
+  static const String setPreference = 'Next';
 }

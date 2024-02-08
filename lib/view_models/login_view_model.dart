@@ -43,10 +43,7 @@ class LoginViewModel extends ChangeNotifier {
         // For testing purposes, just print the user's hasPreference value
         print(userModel.hasPreference);
       } else {
-        // Redirect to the preference page
-        // navigateTo('preference');
-        // For testing purposes, just print the user's hasPreference value
-        print(userModel.hasPreference);
+        navigateTo('preference');
       }
 
 

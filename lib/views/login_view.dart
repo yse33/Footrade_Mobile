@@ -28,7 +28,7 @@ class LoginView extends StatelessWidget {
               create: (context) => LoginViewModel(
                 navigateTo: (routeName) {
                   Navigator.pushNamed(context, routeName);
-                }
+                },
               ),
               child: Consumer<LoginViewModel>(
                 builder: (context, viewModel, _) {
