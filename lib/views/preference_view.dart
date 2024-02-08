@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../constants/app_strings.dart';
 import '../view_models/preference_view_model.dart';
+import '../components/custom_warning_snackbar.dart';
+import '../constants/app_strings.dart';
 import '../constants/app_colors.dart';
 
 class PreferenceView extends StatelessWidget {
@@ -47,7 +48,6 @@ class PreferenceView extends StatelessWidget {
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
             return AlertDialog(
-              // have the title in the middle
               title: const Text(
                 AppStrings.sizeDialogTitle,
                 textAlign: TextAlign.center,
@@ -112,6 +112,18 @@ class PreferenceView extends StatelessWidget {
     );
   }
 
+  Future<void> _savePreferences(BuildContext context, PreferenceViewModel viewModel) async {
+    try {
+      await viewModel.savePreferences();
+    } catch (e) {
+      if (!context.mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        CustomWarningSnackbar(message: e.toString().replaceAll('Exception: ', '')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -154,8 +166,8 @@ class PreferenceView extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.only(bottom: 16),
                     child: ElevatedButton(
-                      onPressed: () {
-                        viewModel.savePreferences();
+                      onPressed: () async {
+                        _savePreferences(context, viewModel);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.black,

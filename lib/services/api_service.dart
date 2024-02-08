@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 
 import '../models/user_model.dart';
 import '../services/storage_service.dart';
+import '../constants/app_strings.dart';
 
 class ApiService {
   static final String _baseUrl = dotenv.env['API_BASE_URL']!;
@@ -28,7 +29,7 @@ class ApiService {
     } else if (response.statusCode == 409) {
       throw Exception(jsonDecode(response.body)['message']);
     } else {
-      throw Exception('Failed to register user');
+      throw Exception(AppStrings.failedRegister);
     }
   }
 
@@ -51,21 +52,21 @@ class ApiService {
     } else if (response.statusCode == 401) {
       throw Exception(jsonDecode(response.body)['message']);
     } else {
-      throw Exception('Failed to login user');
+      throw Exception(AppStrings.failedLogin);
     }
   }
 
-  Future<void> saveUserPreference(List<int> brands, List<String> sizes) async {
+  Future<void> saveUserPreference(List<String> brands, List<String> sizes) async {
     final token = await StorageService.getToken();
 
     if (token == null) {
-      throw Exception('Token not found');
+      throw Exception(AppStrings.tokenNotFound);
     }
 
     final username = await StorageService.getUsername();
 
     if (username == null) {
-      throw Exception('Username not found');
+      throw Exception(AppStrings.usernameNotFound);
     }
 
     final response = await http.put(
@@ -81,7 +82,7 @@ class ApiService {
     );
 
     if (response.statusCode != 200) {
-      throw Exception('Failed to set preference');
+      throw Exception(AppStrings.failedSavePreference);
     }
   }
 }

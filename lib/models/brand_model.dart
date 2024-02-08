@@ -1,7 +1,5 @@
-import '../utils/brand_enum.dart';
-
 class BrandModel {
-  final BrandEnum brand;
+  final String brand;
   final String image;
   bool isSelected = false;
 

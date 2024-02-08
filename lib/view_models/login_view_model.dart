@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../components/custom_error_snackbar.dart';
 import '../models/user_model.dart';
 import '../services/api_service.dart';
 import '../services/storage_service.dart';
@@ -45,16 +44,10 @@ class LoginViewModel extends ChangeNotifier {
       } else {
         navigateTo('preference');
       }
-
-
     } catch (e) {
       Navigator.pop(context);
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        CustomErrorSnackbar(
-          message: e.toString().replaceAll('Exception: ', ''),
-        ),
-      );
+      throw Exception(e.toString().replaceAll('Exception: ', ''));
     }
   }
 

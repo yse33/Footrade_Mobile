@@ -5,6 +5,7 @@ import '../view_models/login_view_model.dart';
 import '../components/custom_button.dart';
 import '../components/custom_textfield.dart';
 import '../components/custom_logo.dart';
+import '../components/custom_error_snackbar.dart';
 import '../constants/app_strings.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_dimensions.dart';
@@ -14,6 +15,18 @@ class LoginView extends StatelessWidget {
   LoginView({super.key});
 
   final _formKey = GlobalKey<FormState>();
+
+  Future<void> _loginUser(BuildContext context, LoginViewModel viewModel) async {
+    try {
+      await viewModel.loginUser(context);
+    } catch (e) {
+      if (!context.mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        CustomErrorSnackbar(message: e.toString().replaceAll('Exception: ', '')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +103,7 @@ class LoginView extends StatelessWidget {
                                 },
                               );
 
-                              viewModel.loginUser(context);
+                              _loginUser(context, viewModel);
                             }
                           },
                         ),

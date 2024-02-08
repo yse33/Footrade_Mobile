@@ -3,31 +3,32 @@ import 'package:flutter/material.dart';
 import '../models/brand_model.dart';
 import '../models/size_model.dart';
 import '../services/api_service.dart';
-import '../utils/brand_enum.dart';
+import '../constants/app_strings.dart';
 
 class PreferenceViewModel extends ChangeNotifier {
   final ApiService apiService = ApiService();
 
   List<BrandModel> brands = [];
-  final List<SizeModel> sizes = [
-    SizeModel(size: "EU 36"), SizeModel(size: "EU 36.5"), SizeModel(size: "EU 37"), SizeModel(size: "EU 38"),
-    SizeModel(size: "EU 38.5"), SizeModel(size: "EU 39"), SizeModel(size: "EU 40"), SizeModel(size: "EU 40.5"),
-    SizeModel(size: "EU 41"), SizeModel(size: "EU 42"), SizeModel(size: "EU 42.5"), SizeModel(size: "EU 43"),
-    SizeModel(size: "EU 44"), SizeModel(size: "EU 44.5"), SizeModel(size: "EU 45"), SizeModel(size: "EU 45.5"),
-    SizeModel(size: "EU 46"), SizeModel(size: "EU 47"), SizeModel(size: "EU 47.5"), SizeModel(size: "EU 48"),
-    SizeModel(size: "EU 48.5"), SizeModel(size: "EU 49"), SizeModel(size: "EU 49.5"), SizeModel(size: "EU 50"),
-    SizeModel(size: "EU 50.5"), SizeModel(size: "EU 51.5"), SizeModel(size: "EU 52.5")
-  ];
+  final List<SizeModel> sizes = [];
 
   PreferenceViewModel() {
     initBrands();
+    initSizes();
   }
 
   void initBrands() {
     for (int i = 0; i < 5; i++) {
       brands.add(BrandModel(
-        brand: BrandEnum.values[i],
-        image: 'assets/images/brand$i.png',
+        brand: AppStrings.brandNames[i],
+        image: 'assets/images/${AppStrings.brandNames[i]}.png',
+      ));
+    }
+  }
+
+  void initSizes() {
+    for (int i = 0; i < AppStrings.brandSizes.length; i++) {
+      sizes.add(SizeModel(
+        size: AppStrings.brandSizes[i],
       ));
     }
   }
@@ -42,10 +43,15 @@ class PreferenceViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void savePreferences() async {
+  Future<void> savePreferences() async {
     // TODO: check if brands and sizes are selected
+
+    if (brands.every((brand) => !brand.isSelected) || sizes.every((size) => !size.isSelected)) {
+      throw Exception(AppStrings.preferenceFailed);
+    }
+
     await apiService.saveUserPreference(
-      brands.where((brand) => brand.isSelected).map((brand) => BrandEnum.values.indexOf(brand.brand)).toList(),
+      brands.where((brand) => brand.isSelected).map((brand) => brand.brand.toUpperCase()).toList(),
       sizes.where((size) => size.isSelected).map((size) => size.size).toList(),
     );
   }
