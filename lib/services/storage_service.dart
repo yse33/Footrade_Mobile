@@ -6,27 +6,27 @@ class StorageService {
   static const String _tokenKey = 'token';
   static const String _usernameKey = 'username';
 
-  static Future<void> storeToken(String token) async {
+  Future<void> storeToken(String token) async {
     await _storage.write(key: _tokenKey, value: token);
   }
 
-  static Future<String?> getToken() async {
+  Future<String?> getToken() async {
     return await _storage.read(key: _tokenKey);
   }
 
-  static Future<void> deleteToken() async {
+  Future<void> deleteToken() async {
     await _storage.delete(key: _tokenKey);
   }
 
-  static Future<void> storeUsername(String username) async {
+  Future<void> storeUsername(String username) async {
     await _storage.write(key: _usernameKey, value: username);
   }
 
-  static Future<String?> getUsername() async {
+  Future<String?> getUsername() async {
     return await _storage.read(key: _usernameKey);
   }
 
-  static Future<void> deleteUsername() async {
+  Future<void> deleteUsername() async {
     await _storage.delete(key: _usernameKey);
   }
 }

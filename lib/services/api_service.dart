@@ -1,6 +1,8 @@
 import 'dart:convert';
+
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:get_it/get_it.dart';
 
 import '../models/user_model.dart';
 import '../services/storage_service.dart';
@@ -8,6 +10,8 @@ import '../constants/app_strings.dart';
 
 class ApiService {
   static final String _baseUrl = dotenv.env['API_BASE_URL']!;
+
+  final StorageService _storageService = GetIt.instance<StorageService>();
 
   Future<UserModel> registerUser(String username, String email, String password) async {
     final response = await http.post(
@@ -57,13 +61,13 @@ class ApiService {
   }
 
   Future<void> saveUserPreference(List<String> brands, List<String> sizes) async {
-    final token = await StorageService.getToken();
+    final token = await _storageService.getToken();
 
     if (token == null) {
       throw Exception(AppStrings.tokenNotFound);
     }
 
-    final username = await StorageService.getUsername();
+    final username = await _storageService.getUsername();
 
     if (username == null) {
       throw Exception(AppStrings.usernameNotFound);
