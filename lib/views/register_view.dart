@@ -100,18 +100,10 @@ class RegisterView extends StatelessWidget {
 
                         CustomButton(
                           text: AppStrings.registerButton,
-                          onPressed: () {
+                          isLoading: viewModel.isLoading,
+                          onPressed: () async {
                             if (_formKey.currentState!.validate()) {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return const Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                },
-                              );
-
-                              _registerUser(context, viewModel);
+                              await _registerUser(context, viewModel);
                             }
                           },
                         ),

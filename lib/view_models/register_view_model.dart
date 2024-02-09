@@ -14,6 +14,7 @@ class RegisterViewModel extends ChangeNotifier {
   final TextEditingController confirmPasswordController = TextEditingController();
   bool obscurePassword = true;
   bool obscureConfirmPassword = true;
+  bool isLoading = false;
 
   final Function(String) navigateTo;
 
@@ -30,6 +31,11 @@ class RegisterViewModel extends ChangeNotifier {
 
   Future<void> registerUser(BuildContext context) async {
     try {
+      if (isLoading) return;
+
+      isLoading = true;
+      notifyListeners();
+
       final UserModel userModel = await apiService.registerUser(
         usernameController.text,
         emailController.text,
@@ -38,9 +44,6 @@ class RegisterViewModel extends ChangeNotifier {
 
       await StorageService.storeToken(userModel.token);
       await StorageService.storeUsername(userModel.username);
-
-      if (!context.mounted) return;
-      Navigator.popUntil(context, (route) => route.isFirst);
 
       if (userModel.hasPreference) {
         // Redirect to the home page
@@ -51,12 +54,12 @@ class RegisterViewModel extends ChangeNotifier {
         navigateTo('preference');
       }
     } catch (e) {
-      Navigator.pop(context);
-
       throw Exception(e.toString().replaceAll('Exception: ', ''));
+    } finally {
+      isLoading = false;
+      notifyListeners();
     }
   }
-
 
   void loginNavigation() {
     navigateTo('login');

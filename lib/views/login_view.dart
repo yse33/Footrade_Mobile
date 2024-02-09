@@ -91,19 +91,11 @@ class LoginView extends StatelessWidget {
                         AppDimensions.sizedBoxH25,
 
                         CustomButton(
-                          text: AppStrings.loginButton,
-                          onPressed: () {
+                          text: AppStrings.loginText,
+                          isLoading: viewModel.isLoading,
+                          onPressed: () async {
                             if (_formKey.currentState!.validate()) {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return const Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                },
-                              );
-
-                              _loginUser(context, viewModel);
+                              await _loginUser(context, viewModel);
                             }
                           },
                         ),

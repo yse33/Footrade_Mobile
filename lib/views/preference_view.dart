@@ -168,7 +168,7 @@ class PreferenceView extends StatelessWidget {
                     margin: const EdgeInsets.only(bottom: 16),
                     child: ElevatedButton(
                       onPressed: () async {
-                        _savePreferences(context, viewModel);
+                        await _savePreferences(context, viewModel);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.black,
