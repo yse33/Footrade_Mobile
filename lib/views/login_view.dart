@@ -52,7 +52,7 @@ class LoginView extends StatelessWidget {
                       children: [
                         const CustomLogo(),
 
-                        const SizedBox(height: AppDimensions.mediumSizedBox),
+                        AppDimensions.sizedBoxH25,
 
                         CustomTextField(
                           controller: viewModel.usernameController,
@@ -63,7 +63,7 @@ class LoginView extends StatelessWidget {
                           onPressed: null,
                         ),
 
-                        const SizedBox(height: AppDimensions.smallSizedBox),
+                        AppDimensions.sizedBoxH10,
 
                         CustomTextField(
                           controller: viewModel.passwordController,
@@ -74,7 +74,7 @@ class LoginView extends StatelessWidget {
                           onPressed: viewModel.togglePasswordVisibility,
                         ),
 
-                        const SizedBox(height: AppDimensions.smallSizedBox),
+                        AppDimensions.sizedBoxH10,
 
                         InkWell(
                           onTap: () {
@@ -88,7 +88,7 @@ class LoginView extends StatelessWidget {
                           ),
                         ),
 
-                        const SizedBox(height: AppDimensions.mediumSizedBox),
+                        AppDimensions.sizedBoxH25,
 
                         CustomButton(
                           text: AppStrings.loginButton,
@@ -108,7 +108,7 @@ class LoginView extends StatelessWidget {
                           },
                         ),
 
-                        const SizedBox(height: AppDimensions.largeSizedBox),
+                        AppDimensions.sizedBoxH50,
 
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -118,7 +118,7 @@ class LoginView extends StatelessWidget {
                               style: TextStyle(color: AppColors.grey),
                             ),
 
-                            const SizedBox(width: AppDimensions.smallSizedBox),
+                            AppDimensions.sizedBoxH10,
 
                             TextButton(
                               onPressed: () {

@@ -5,6 +5,7 @@ import '../view_models/preference_view_model.dart';
 import '../components/custom_warning_snackbar.dart';
 import '../constants/app_strings.dart';
 import '../constants/app_colors.dart';
+import '../constants/app_dimensions.dart';
 
 class PreferenceView extends StatelessWidget {
   const PreferenceView({super.key});
@@ -24,8 +25,8 @@ class PreferenceView extends StatelessWidget {
             viewModel.toggleBrand(brand);
           },
           child: Container(
-            margin: const EdgeInsets.all(8),
-            padding: const EdgeInsets.all(8),
+            margin: const EdgeInsets.all(8.0),
+            padding: AppDimensions.standardPadding,
             decoration: BoxDecoration(
               color: brand.isSelected ? AppColors.grey : null,
               borderRadius: BorderRadius.circular(8.0),
@@ -69,7 +70,7 @@ class PreferenceView extends StatelessWidget {
                           side: const BorderSide(color: AppColors.grey, width: 2),
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: AppDimensions.standardPadding,
                           child: Row(
                             children: [
                               Expanded(

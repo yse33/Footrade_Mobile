@@ -44,8 +44,6 @@ class PreferenceViewModel extends ChangeNotifier {
   }
 
   Future<void> savePreferences() async {
-    // TODO: check if brands and sizes are selected
-
     if (brands.every((brand) => !brand.isSelected) || sizes.every((size) => !size.isSelected)) {
       throw Exception(AppStrings.preferenceFailed);
     }
