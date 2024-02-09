@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 import '../models/user_model.dart';
 import '../services/api_service.dart';
@@ -6,7 +7,12 @@ import '../services/storage_service.dart';
 import '../constants/app_strings.dart';
 
 class RegisterViewModel extends ChangeNotifier {
-  final ApiService apiService = ApiService();
+  final Function(String) navigateTo;
+
+  RegisterViewModel({required this.navigateTo});
+
+  final ApiService _apiService = GetIt.I.get<ApiService>();
+  final StorageService _storageService = GetIt.I.get<StorageService>();
 
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -15,10 +21,6 @@ class RegisterViewModel extends ChangeNotifier {
   bool obscurePassword = true;
   bool obscureConfirmPassword = true;
   bool isLoading = false;
-
-  final Function(String) navigateTo;
-
-  RegisterViewModel({required this.navigateTo});
 
   @override
   void dispose() {
@@ -36,14 +38,14 @@ class RegisterViewModel extends ChangeNotifier {
       isLoading = true;
       notifyListeners();
 
-      final UserModel userModel = await apiService.registerUser(
+      final UserModel userModel = await _apiService.registerUser(
         usernameController.text,
         emailController.text,
         passwordController.text,
       );
 
-      await StorageService.storeToken(userModel.token);
-      await StorageService.storeUsername(userModel.username);
+      await _storageService.storeToken(userModel.token);
+      await _storageService.storeUsername(userModel.username);
 
       if (userModel.hasPreference) {
         // Redirect to the home page
