@@ -38,6 +38,10 @@ class AppStrings {
   ];
   static const String preferenceFailed = 'Please select at least one brand and size';
 
+  // Home
+  static const String salesTitle = 'Sales For Me';
+  static const String favoritesTitle = 'Favorites';
+
   // API Service Errors
   static const String tokenNotFound = 'Token not found';
   static const String usernameNotFound = 'Username not found';

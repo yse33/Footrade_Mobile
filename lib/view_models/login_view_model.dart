@@ -42,10 +42,7 @@ class LoginViewModel extends ChangeNotifier {
       await _storageService.storeUsername(userModel.username);
 
       if (userModel.hasPreference) {
-        // Redirect to the home page
-        // navigateTo('home');
-        // For testing purposes, just print the user's hasPreference value
-        print(userModel.hasPreference);
+        navigateTo('home');
       } else {
         navigateTo('preference');
       }

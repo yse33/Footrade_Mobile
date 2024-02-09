@@ -4,6 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'views/preference_view.dart';
 import 'views/register_view.dart';
 import 'views/login_view.dart';
+import 'views/home_view.dart';
 
 import 'dependency_injection/dependency_injection.dart';
 
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
         'login': (context) => LoginView(),
         'register': (context) => RegisterView(),
         'preference': (context) => const PreferenceView(),
-        //'home': (context) => HomeView(),
+        'home': (context) => HomeView(),
       },
     );
   }
