@@ -10,7 +10,7 @@ class CustomLogo extends StatelessWidget {
       width: MediaQuery.of(context).size.width * AppDimensions.logoWidthMultiplier,
       height: MediaQuery.of(context).size.height * AppDimensions.logoHeightMultiplier,
       child: Image.asset(
-        'assets/logo-transparent.png',
+        'assets/images/logo-transparent.png',
         fit: BoxFit.cover,
       ),
     );

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:footrade_mvvm/components/custom_logo.dart';
 import 'package:provider/provider.dart';
 
 import '../view_models/register_view_model.dart';
 import '../components/custom_button.dart';
 import '../components/custom_textfield.dart';
+import '../components/custom_logo.dart';
+import '../components/custom_error_snackbar.dart';
 import '../constants/app_strings.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_dimensions.dart';
@@ -14,6 +15,18 @@ class RegisterView extends StatelessWidget {
   RegisterView({super.key});
 
   final _formKey = GlobalKey<FormState>();
+
+  Future<void> _registerUser(BuildContext context, RegisterViewModel viewModel) async {
+    try {
+      await viewModel.registerUser(context);
+    } catch (e) {
+      if (!context.mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        CustomErrorSnackbar(message: e.toString().replaceAll('Exception: ', '')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +52,7 @@ class RegisterView extends StatelessWidget {
                       children: [
                         const CustomLogo(),
 
-                        const SizedBox(height: AppDimensions.mediumSizedBox),
+                        AppDimensions.sizedBoxH25,
 
                         CustomTextField(
                           controller: viewModel.usernameController,
@@ -50,7 +63,7 @@ class RegisterView extends StatelessWidget {
                           onPressed: null,
                         ),
 
-                        const SizedBox(height: AppDimensions.smallSizedBox),
+                        AppDimensions.sizedBoxH10,
 
                         CustomTextField(
                           controller: viewModel.emailController,
@@ -61,7 +74,7 @@ class RegisterView extends StatelessWidget {
                           onPressed: null,
                         ),
 
-                        const SizedBox(height: AppDimensions.smallSizedBox),
+                        AppDimensions.sizedBoxH10,
 
                         CustomTextField(
                           controller: viewModel.passwordController,
@@ -72,7 +85,7 @@ class RegisterView extends StatelessWidget {
                           onPressed: viewModel.togglePasswordVisibility,
                         ),
 
-                        const SizedBox(height: AppDimensions.smallSizedBox),
+                        AppDimensions.sizedBoxH10,
 
                         CustomTextField(
                           controller: viewModel.confirmPasswordController,
@@ -83,27 +96,19 @@ class RegisterView extends StatelessWidget {
                           onPressed: viewModel.toggleConfirmPasswordVisibility,
                         ),
 
-                        const SizedBox(height: AppDimensions.mediumSizedBox),
+                        AppDimensions.sizedBoxH25,
 
                         CustomButton(
                           text: AppStrings.registerButton,
-                          onPressed: () {
+                          isLoading: viewModel.isLoading,
+                          onPressed: () async {
                             if (_formKey.currentState!.validate()) {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return const Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                },
-                              );
-
-                              viewModel.registerUser(context);
+                              await _registerUser(context, viewModel);
                             }
                           },
                         ),
 
-                        const SizedBox(height: AppDimensions.mediumSizedBox),
+                        AppDimensions.sizedBoxH50,
 
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -113,7 +118,7 @@ class RegisterView extends StatelessWidget {
                               style: TextStyle(color: AppColors.grey),
                             ),
 
-                            const SizedBox(width: AppDimensions.smallSizedBox),
+                            AppDimensions.sizedBoxH10,
 
                             TextButton(
                               onPressed: () {
@@ -130,7 +135,7 @@ class RegisterView extends StatelessWidget {
                           ],
                         ),
                       ],
-                    )
+                    ),
                   );
                 }
               )

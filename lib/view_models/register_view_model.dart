@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../components/custom_error_snackbar.dart';
 import '../models/user_model.dart';
 import '../services/api_service.dart';
 import '../services/storage_service.dart';
@@ -15,6 +14,7 @@ class RegisterViewModel extends ChangeNotifier {
   final TextEditingController confirmPasswordController = TextEditingController();
   bool obscurePassword = true;
   bool obscureConfirmPassword = true;
+  bool isLoading = false;
 
   final Function(String) navigateTo;
 
@@ -31,6 +31,11 @@ class RegisterViewModel extends ChangeNotifier {
 
   Future<void> registerUser(BuildContext context) async {
     try {
+      if (isLoading) return;
+
+      isLoading = true;
+      notifyListeners();
+
       final UserModel userModel = await apiService.registerUser(
         usernameController.text,
         emailController.text,
@@ -40,31 +45,21 @@ class RegisterViewModel extends ChangeNotifier {
       await StorageService.storeToken(userModel.token);
       await StorageService.storeUsername(userModel.username);
 
-      if (!context.mounted) return;
-      Navigator.popUntil(context, (route) => route.isFirst);
-
       if (userModel.hasPreference) {
         // Redirect to the home page
         // navigateTo('home');
         // For testing purposes, just print the user's hasPreference value
         print(userModel.hasPreference);
       } else {
-        // Redirect to the preference page
-        // navigateTo('preference');
-        // For testing purposes, just print the user's hasPreference value
-        print(userModel.hasPreference);
+        navigateTo('preference');
       }
     } catch (e) {
-      Navigator.pop(context);
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        CustomErrorSnackbar(
-          message: e.toString().replaceAll('Exception: ', ''),
-        ),
-      );
+      throw Exception(e.toString().replaceAll('Exception: ', ''));
+    } finally {
+      isLoading = false;
+      notifyListeners();
     }
   }
-
 
   void loginNavigation() {
     navigateTo('login');

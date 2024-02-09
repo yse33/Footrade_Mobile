@@ -5,6 +5,7 @@ import '../view_models/login_view_model.dart';
 import '../components/custom_button.dart';
 import '../components/custom_textfield.dart';
 import '../components/custom_logo.dart';
+import '../components/custom_error_snackbar.dart';
 import '../constants/app_strings.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_dimensions.dart';
@@ -14,6 +15,18 @@ class LoginView extends StatelessWidget {
   LoginView({super.key});
 
   final _formKey = GlobalKey<FormState>();
+
+  Future<void> _loginUser(BuildContext context, LoginViewModel viewModel) async {
+    try {
+      await viewModel.loginUser(context);
+    } catch (e) {
+      if (!context.mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        CustomErrorSnackbar(message: e.toString().replaceAll('Exception: ', '')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,107 +38,99 @@ class LoginView extends StatelessWidget {
           ),
           child: Center(
             child: ChangeNotifierProvider(
-                create: (context) => LoginViewModel(
-                  navigateTo: (routeName) {
-                    Navigator.pushNamed(context, routeName);
-                  }
-                ),
-                child: Consumer<LoginViewModel>(
-                  builder: (context, viewModel, _) {
-                    return Form(
-                      key: _formKey,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const CustomLogo(),
+              create: (context) => LoginViewModel(
+                navigateTo: (routeName) {
+                  Navigator.pushNamed(context, routeName);
+                },
+              ),
+              child: Consumer<LoginViewModel>(
+                builder: (context, viewModel, _) {
+                  return Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const CustomLogo(),
 
-                          const SizedBox(height: AppDimensions.mediumSizedBox),
+                        AppDimensions.sizedBoxH25,
 
-                          CustomTextField(
-                            controller: viewModel.usernameController,
-                            labelText: AppStrings.usernameLabel,
-                            prefixIcon: AppIcons.username,
-                            obscureText: false,
-                            validator: viewModel.validateUsername,
-                            onPressed: null,
-                          ),
+                        CustomTextField(
+                          controller: viewModel.usernameController,
+                          labelText: AppStrings.usernameLabel,
+                          prefixIcon: AppIcons.username,
+                          obscureText: false,
+                          validator: viewModel.validateUsername,
+                          onPressed: null,
+                        ),
 
-                          const SizedBox(height: AppDimensions.smallSizedBox),
+                        AppDimensions.sizedBoxH10,
 
-                          CustomTextField(
-                            controller: viewModel.passwordController,
-                            labelText: AppStrings.passwordLabel,
-                            prefixIcon: AppIcons.password,
-                            obscureText: viewModel.obscurePassword,
-                            validator: viewModel.validatePassword,
-                            onPressed: viewModel.togglePasswordVisibility,
-                          ),
+                        CustomTextField(
+                          controller: viewModel.passwordController,
+                          labelText: AppStrings.passwordLabel,
+                          prefixIcon: AppIcons.password,
+                          obscureText: viewModel.obscurePassword,
+                          validator: viewModel.validatePassword,
+                          onPressed: viewModel.togglePasswordVisibility,
+                        ),
 
-                          const SizedBox(height: AppDimensions.smallSizedBox),
+                        AppDimensions.sizedBoxH10,
 
-                          InkWell(
-                            onTap: () {
-                              // TODO: Implement forgot password
-                            },
-                            child: const Text(
-                              AppStrings.forgotPassword,
-                              style: TextStyle(
-                                color: AppColors.grey,
-                              ),
+                        InkWell(
+                          onTap: () {
+                            // TODO: Implement forgot password
+                          },
+                          child: const Text(
+                            AppStrings.forgotPassword,
+                            style: TextStyle(
+                              color: AppColors.grey,
                             ),
                           ),
+                        ),
 
-                          const SizedBox(height: AppDimensions.mediumSizedBox),
+                        AppDimensions.sizedBoxH25,
 
-                          CustomButton(
-                            text: AppStrings.loginButton,
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return const Center(
-                                      child: CircularProgressIndicator(),
-                                    );
-                                  },
-                                );
+                        CustomButton(
+                          text: AppStrings.loginText,
+                          isLoading: viewModel.isLoading,
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                              await _loginUser(context, viewModel);
+                            }
+                          },
+                        ),
 
-                                viewModel.loginUser(context);
-                              }
-                            },
-                          ),
+                        AppDimensions.sizedBoxH50,
 
-                          const SizedBox(height: AppDimensions.largeSizedBox),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              AppStrings.promptRegister,
+                              style: TextStyle(color: AppColors.grey),
+                            ),
 
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                AppStrings.promptRegister,
-                                style: TextStyle(color: AppColors.grey),
-                              ),
+                            AppDimensions.sizedBoxH10,
 
-                              const SizedBox(width: AppDimensions.smallSizedBox),
-
-                              TextButton(
-                                onPressed: () {
-                                  viewModel.registerNavigation();
-                                },
-                                child: const Text(
-                                  AppStrings.registerText,
-                                  style: TextStyle(
-                                    color: AppColors.blue,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                            TextButton(
+                              onPressed: () {
+                                viewModel.registerNavigation();
+                              },
+                              child: const Text(
+                                AppStrings.registerText,
+                                style: TextStyle(
+                                  color: AppColors.blue,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    );
-                  }
-               )
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  );
+                }
+              )
             )
           )
         )
