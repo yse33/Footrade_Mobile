@@ -64,4 +64,5 @@ class AppStrings {
   static const String failedSavePreference = 'Failed to save user preference';
   static const String failedSearch = 'Failed to search for sales';
   static const String failedSuggestions = 'Failed to get suggestions';
+  static const String failedSetFavorite = 'Failed to set favorite';
 }

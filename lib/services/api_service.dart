@@ -111,6 +111,7 @@ class ApiService {
       Uri.parse('$_baseUrl/api/v1/shoes/search')
         .replace(queryParameters: {
           'query': query,
+          'username': username,
         }),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
@@ -149,6 +150,35 @@ class ApiService {
       return data.map((suggestion) => suggestion.toString()).toList();
     } else {
       throw Exception(AppStrings.failedSuggestions);
+    }
+  }
+
+  Future<void> setUserFavorite(String shoeId) async {
+    final token = await _storageService.getToken();
+
+    if (token == null) {
+      throw Exception(AppStrings.tokenNotFound);
+    }
+
+    final username = await _storageService.getUsername();
+
+    if (username == null) {
+      throw Exception(AppStrings.usernameNotFound);
+    }
+
+    final response = await http.put(
+      Uri.parse('$_baseUrl/api/v1/auth/favorite')
+        .replace(queryParameters: {
+          'username': username,
+          'id': shoeId,
+        }),
+        headers: <String, String>{
+          'Authorization': 'Bearer $token',
+        },
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception(AppStrings.failedSetFavorite);
     }
   }
 }
