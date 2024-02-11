@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:footrade_mvvm/view_models/search_view_model.dart';
 
+import '../components/custom_shoe_search_listing_widget.dart';
 import '../constants/app_icons.dart';
-import '../constants/app_dimensions.dart';
 
 class CustomSearchDelegate extends SearchDelegate {
   final SearchViewModel viewModel = SearchViewModel();
@@ -41,46 +41,13 @@ class CustomSearchDelegate extends SearchDelegate {
         } else if (viewModel.shoes.isEmpty) {
           return Center(child: Text('No results found for: $query'));
         } else {
-          return ListView.builder(
-            itemCount: viewModel.shoes.length,
-            itemBuilder: (context, index) {
-              final shoe = viewModel.shoes[index];
-              return Card(
-                elevation: 4,
-                margin: AppDimensions.standardMargin,
-                child: InkWell(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Image.network(
-                        '${shoe.image}?${viewModel.sasToken}',
-                        fit: BoxFit.fitWidth,
-                        height: 300,
-                      ),
-                      Padding(
-                        padding: AppDimensions.standardPadding,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              shoe.model,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                              ),
-                            ),
-                            Text(
-                              shoe.brand,
-                              style: const TextStyle(fontSize: 16),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            },
+          return Column(
+            children: [
+              CustomShoeSearchListingWidget(
+                shoes: viewModel.shoes,
+                sasToken: viewModel.sasToken,
+              ),
+            ],
           );
         }
       },
