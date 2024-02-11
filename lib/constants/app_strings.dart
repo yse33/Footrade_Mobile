@@ -56,6 +56,13 @@ class AppStrings {
   static const String suggestionsFailed = 'Failed to get suggestions for: ';
   static const String loadMore = 'Load more';
 
+  // Shoe Preferences
+  static const String shoePreferencesEmpty = 'There are currently no shoes on sale that match your taste.';
+
+  // Shoe Detail
+  static const String shoeDetailTitle = 'Shoe Details';
+  static const String shoeDetailProvider = 'Go to ';
+
   // API Service Errors
   static const String tokenNotFound = 'Token not found';
   static const String usernameNotFound = 'Username not found';
@@ -65,4 +72,6 @@ class AppStrings {
   static const String failedSearch = 'Failed to search for sales';
   static const String failedSuggestions = 'Failed to get suggestions';
   static const String failedSetFavorite = 'Failed to set favorite';
+  static const String failedGetShoePreferences = 'Failed to get shoes for user';
+  static const String failedGetShoeDetail = 'Failed to get shoe detail';
 }

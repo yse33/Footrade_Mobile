@@ -17,11 +17,6 @@ class SearchViewModel {
 
   Future<void> searchShoes(String query) async {
     try {
-      if (query.isEmpty) {
-        shoes = [];
-        return;
-      }
-
       _allShoes = await _apiService.searchShoes(query);
       shoes = _allShoes.skip(page * pageSize).take(pageSize).toList();
       hasMore = shoes.length < _allShoes.length;
