@@ -16,4 +16,5 @@ class AppIcons {
   static const IconData logout = Icons.logout;
   static const IconData clear = Icons.clear;
   static const IconData arrowBack = Icons.arrow_back;
+  static const IconData arrowForward = Icons.arrow_forward;
 }

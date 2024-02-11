@@ -8,12 +8,23 @@ class SearchViewModel {
   final ApiService _apiService = GetIt.instance<ApiService>();
   final String sasToken = dotenv.env['AZURE_SAS_TOKEN']!;
 
+  List<ShoeSearchModel> _allShoes = [];
   List<ShoeSearchModel> shoes = [];
   List<String?> suggestions = [];
+  int page = 0;
+  int pageSize = 10;
+  bool hasMore = true;
 
   Future<void> searchShoes(String query) async {
     try {
-      shoes = await _apiService.searchShoes(query);
+      if (query.isEmpty) {
+        shoes = [];
+        return;
+      }
+
+      _allShoes = await _apiService.searchShoes(query);
+      shoes = _allShoes.skip(page * pageSize).take(pageSize).toList();
+      hasMore = shoes.length < _allShoes.length;
     } catch (e) {
       throw Exception(e.toString().replaceAll('Exception: ', ''));
     }
@@ -25,5 +36,19 @@ class SearchViewModel {
     } catch (e) {
       throw Exception(e.toString().replaceAll('Exception: ', ''));
     }
+  }
+
+  Future<void> loadMore() async {
+    page++;
+    shoes.addAll(_allShoes.skip(page * pageSize).take(pageSize).toList());
+    hasMore = shoes.length < _allShoes.length;
+  }
+
+  Future<void> clear() async {
+    shoes = [];
+    _allShoes = [];
+    suggestions = [];
+    page = 0;
+    hasMore = true;
   }
 }

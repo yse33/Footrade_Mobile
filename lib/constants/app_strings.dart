@@ -47,6 +47,15 @@ class AppStrings {
   static const String settingsTitle = 'Settings';
   static const String logoutTitle = 'Logout';
 
+  // Search
+  static const String searchEmpty = 'Please enter a search term';
+  static const String searchResultEmpty = 'No shoes found for: ';
+  static const String searchFailed = 'Failed to search for shoes for: ';
+  static const String suggestionsEmpty = 'Please enter a search term';
+  static const String suggestionsResultEmpty = 'No suggestions found for: ';
+  static const String suggestionsFailed = 'Failed to get suggestions for: ';
+  static const String loadMore = 'Load more';
+
   // API Service Errors
   static const String tokenNotFound = 'Token not found';
   static const String usernameNotFound = 'Username not found';
