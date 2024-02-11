@@ -41,6 +41,11 @@ class AppStrings {
   // Home
   static const String salesTitle = 'Sales For Me';
   static const String favoritesTitle = 'Favorites';
+  static const String homeTitle = 'Home';
+  static const String forMeTitle = 'For Me';
+  static const String inboxTitle = 'Inbox';
+  static const String settingsTitle = 'Settings';
+  static const String logoutTitle = 'Logout';
 
   // API Service Errors
   static const String tokenNotFound = 'Token not found';
@@ -48,4 +53,6 @@ class AppStrings {
   static const String failedRegister = 'Failed to register user';
   static const String failedLogin = 'Failed to login user';
   static const String failedSavePreference = 'Failed to save user preference';
+  static const String failedSearch = 'Failed to search for sales';
+  static const String failedSuggestions = 'Failed to get suggestions';
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppIcons {
-  static const IconData username = Icons.person;
+  static const IconData user = Icons.person;
   static const IconData email = Icons.email;
   static const IconData password = Icons.lock;
   static const IconData visibility = Icons.visibility;
@@ -10,5 +10,9 @@ class AppIcons {
   static const IconData favorite = Icons.favorite;
   static const IconData menu = Icons.menu;
   static const IconData search = Icons.search;
+  static const IconData inbox = Icons.mail_outline;
+  static const IconData settings = Icons.settings;
   static const IconData logout = Icons.logout;
+  static const IconData clear = Icons.clear;
+  static const IconData arrowBack = Icons.arrow_back;
 }

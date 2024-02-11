@@ -25,7 +25,7 @@ class PreferenceView extends StatelessWidget {
             viewModel.toggleBrand(brand);
           },
           child: Container(
-            margin: const EdgeInsets.all(8.0),
+            margin: AppDimensions.standardMargin,
             padding: AppDimensions.standardPadding,
             decoration: BoxDecoration(
               color: brand.isSelected ? AppColors.grey : null,

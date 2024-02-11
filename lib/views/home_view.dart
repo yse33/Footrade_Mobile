@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:footrade_mvvm/components/custom_nav_bar.dart';
 import 'package:provider/provider.dart';
 
+import '../components/custom_nav_bar.dart';
+import '../components/custom_search_delegate.dart';
 import '../view_models/home_view_model.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_icons.dart';
+import '../constants/app_strings.dart';
 
 class HomeView extends StatelessWidget {
   HomeView({super.key});
@@ -52,8 +54,10 @@ class HomeView extends StatelessWidget {
                     color: AppColors.black,
                   ),
                   onPressed: () {
-                    // TODO: Implement search
-                    print('Search');
+                    showSearch(
+                      context: context,
+                      delegate: CustomSearchDelegate(),
+                    );
                   },
                 ),
               ],
@@ -92,13 +96,13 @@ class HomeView extends StatelessWidget {
                           padding: EdgeInsets.only(left: 25.0),
                           child: ListTile(
                             leading: Icon(
-                              Icons.home,
-                              color: Colors.white,
+                              AppIcons.home,
+                              color: AppColors.white,
                             ),
                             title: Text(
-                              'Home',
+                              AppStrings.homeTitle,
                               style: TextStyle(
-                                color: Colors.white,
+                                color: AppColors.white,
                               ),
                             ),
                           ),
@@ -108,13 +112,13 @@ class HomeView extends StatelessWidget {
                           padding: EdgeInsets.only(left: 25.0),
                           child: ListTile(
                             leading: Icon(
-                              Icons.person,
-                              color: Colors.white,
+                              AppIcons.user,
+                              color: AppColors.white,
                             ),
                             title: Text(
-                              'For Me',
+                              AppStrings.forMeTitle,
                               style: TextStyle(
-                                color: Colors.white,
+                                color: AppColors.white,
                               ),
                             ),
                           ),
@@ -124,13 +128,13 @@ class HomeView extends StatelessWidget {
                           padding: EdgeInsets.only(left: 25.0),
                           child: ListTile(
                             leading: Icon(
-                              Icons.mail_outline,
-                              color: Colors.white,
+                              AppIcons.inbox,
+                              color: AppColors.white,
                             ),
                             title: Text(
-                              'Inbox',
+                              AppStrings.inboxTitle,
                               style: TextStyle(
-                                color: Colors.white,
+                                color: AppColors.white,
                               ),
                             ),
                           ),
@@ -140,13 +144,13 @@ class HomeView extends StatelessWidget {
                           padding: EdgeInsets.only(left: 25.0),
                           child: ListTile(
                             leading: Icon(
-                              Icons.settings,
-                              color: Colors.white,
+                              AppIcons.settings,
+                              color: AppColors.white,
                             ),
                             title: Text(
-                              'Settings',
+                              AppStrings.settingsTitle,
                               style: TextStyle(
-                                color: Colors.white,
+                                color: AppColors.white,
                               ),
                             ),
                           ),
@@ -158,13 +162,13 @@ class HomeView extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 25.0, bottom: 25.0),
                     child: ListTile(
                       leading: const Icon(
-                        Icons.logout,
-                        color: Colors.white,
+                        AppIcons.logout,
+                        color: AppColors.white,
                       ),
                       title: const Text(
-                        'Logout',
+                        AppStrings.logoutTitle,
                         style: TextStyle(
-                          color: Colors.white,
+                          color: AppColors.white,
                         ),
                       ),
                       onTap: () async {
