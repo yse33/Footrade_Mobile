@@ -3,6 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 
 import '../models/shoe_preference_model.dart';
+import '../models/shoe_detail_model.dart';
 import '../services/api_service.dart';
 
 class ShoePreferenceViewModel extends ChangeNotifier {
@@ -39,7 +40,7 @@ class ShoePreferenceViewModel extends ChangeNotifier {
     await fetchShoes();
   }
 
-  void onItemClick(String id) async {
-    // TODO: Implement onItemClick
+  Future<ShoeDetailModel> onItemClick(String id) async {
+    return await _apiService.getShoeDetail(id);
   }
 }
