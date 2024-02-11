@@ -7,6 +7,7 @@ import 'package:get_it/get_it.dart';
 import '../models/user_model.dart';
 import '../models/shoe_search_model.dart';
 import '../models/shoe_preference_model.dart';
+import '../models/shoe_detail_model.dart';
 import '../services/storage_service.dart';
 import '../constants/app_strings.dart';
 
@@ -213,6 +214,28 @@ class ApiService {
       return data.map((shoeData) => ShoePreferenceModel.fromJson(shoeData)).toList();
     } else {
       throw Exception(AppStrings.failedGetShoePreferences);
+    }
+  }
+
+  Future<ShoeDetailModel> getShoeDetail(String id) async {
+    final token = await _storageService.getToken();
+
+    if (token == null) {
+      throw Exception(AppStrings.tokenNotFound);
+    }
+
+    final response = await http.get(
+      Uri.parse('$_baseUrl/api/v1/shoes/$id'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return ShoeDetailModel.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
+    } else {
+      throw Exception(AppStrings.failedGetShoeDetail);
     }
   }
 }

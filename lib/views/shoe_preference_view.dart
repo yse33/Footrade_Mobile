@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../models/shoe_detail_model.dart';
 import '../view_models/shoe_preference_view_model.dart';
+import '../views/shoe_detail_view.dart';
 import '../components/custom_shoe_listing_widget.dart';
 import '../components/custom_error_snackbar.dart';
 import '../components/custom_pagination_widget.dart';
@@ -24,6 +26,29 @@ class _ShoePreferenceViewState extends State<ShoePreferenceView> {
     Future.delayed(Duration.zero, () {
       viewModel.fetchShoes();
     });
+  }
+
+  void _onItemClick(String id) async {
+    try {
+      ShoeDetailModel shoe = await viewModel.onItemClick(id);
+
+      if(!context.mounted) return;
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ShoeDetailView(shoe: shoe),
+        ),
+      );
+    } on Exception catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: CustomErrorSnackbar(
+            message: e.toString(),
+          ),
+        ),
+      );
+    }
   }
 
   @override
@@ -50,7 +75,7 @@ class _ShoePreferenceViewState extends State<ShoePreferenceView> {
                 CustomShoeListingWidget(
                   shoes: viewModel.shoes,
                   sasToken: viewModel.sasToken,
-                  onItemClick: (String id) => viewModel.onItemClick(id),
+                  onItemClick: (String id) => _onItemClick(id),
                 ),
             CustomPaginationWidget(
               viewModel: viewModel,
