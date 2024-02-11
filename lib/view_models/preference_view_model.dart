@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 import '../models/brand_model.dart';
 import '../models/size_model.dart';
@@ -6,7 +7,7 @@ import '../services/api_service.dart';
 import '../constants/app_strings.dart';
 
 class PreferenceViewModel extends ChangeNotifier {
-  final ApiService apiService = ApiService();
+  final ApiService _apiService = GetIt.I.get<ApiService>();
 
   List<BrandModel> brands = [];
   final List<SizeModel> sizes = [];
@@ -48,7 +49,7 @@ class PreferenceViewModel extends ChangeNotifier {
       throw Exception(AppStrings.preferenceFailed);
     }
 
-    await apiService.saveUserPreference(
+    await _apiService.saveUserPreference(
       brands.where((brand) => brand.isSelected).map((brand) => brand.brand.toUpperCase()).toList(),
       sizes.where((size) => size.isSelected).map((size) => size.size).toList(),
     );
