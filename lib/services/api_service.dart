@@ -6,7 +6,7 @@ import 'package:get_it/get_it.dart';
 
 import '../models/user_model.dart';
 import '../models/shoe_search_model.dart';
-import '../models/shoe_preference_model.dart';
+import '../models/shoe_listing_model.dart';
 import '../models/shoe_detail_model.dart';
 import '../services/storage_service.dart';
 import '../constants/app_strings.dart';
@@ -184,7 +184,7 @@ class ApiService {
     }
   }
 
-  Future<List<ShoePreferenceModel>> getShoePreferences({int page = 0, int pageSize = 20}) async {
+  Future<List<ShoeListingModel>> getShoePreferences({int page = 0, int pageSize = 20}) async {
     final token = await _storageService.getToken();
 
     if (token == null) {
@@ -211,9 +211,45 @@ class ApiService {
 
     if (response.statusCode == 200) {
       final List<dynamic> data = jsonDecode(utf8.decode(response.bodyBytes));
-      return data.map((shoeData) => ShoePreferenceModel.fromJson(shoeData)).toList();
+      return data.map((shoeData) => ShoeListingModel.fromJson(shoeData)).toList();
     } else {
       throw Exception(AppStrings.failedGetShoePreferences);
+    }
+  }
+
+  Future<List<ShoeListingModel>> getShoeFavorites({int page = 0, int pageSize = 20}) async {
+    final token = await _storageService.getToken();
+
+    if (token == null) {
+      throw Exception(AppStrings.tokenNotFound);
+    }
+
+    final username = await _storageService.getUsername();
+
+    if (username == null) {
+      throw Exception(AppStrings.usernameNotFound);
+    }
+
+    print('$_baseUrl/api/v1/shoes/favorite/$username');
+
+    final response = await http.get(
+      Uri.parse('$_baseUrl/api/v1/shoes/favorite/$username')
+        .replace(queryParameters: {
+          'page': page.toString(),
+          'pageSize': pageSize.toString(),
+        }),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $token',
+        },
+    );
+
+    if (response.statusCode == 200) {
+      final List<dynamic> data = jsonDecode(utf8.decode(response.bodyBytes));
+      print(data);
+      return data.map((shoeData) => ShoeListingModel.fromJson(shoeData)).toList();
+    } else {
+      throw Exception(AppStrings.failedGetShoeFavorites);
     }
   }
 

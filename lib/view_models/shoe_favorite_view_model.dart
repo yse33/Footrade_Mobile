@@ -6,7 +6,7 @@ import '../models/shoe_listing_model.dart';
 import '../models/shoe_detail_model.dart';
 import '../services/api_service.dart';
 
-class ShoePreferenceViewModel extends ChangeNotifier {
+class ShoeFavoriteViewModel extends ChangeNotifier {
   final String sasToken = dotenv.env['AZURE_SAS_TOKEN']!;
   final ApiService _apiService = GetIt.I<ApiService>();
   List<ShoeListingModel> shoes = [];
@@ -21,7 +21,7 @@ class ShoePreferenceViewModel extends ChangeNotifier {
       isLoading = true;
       notifyListeners();
 
-      shoes = await _apiService.getShoePreferences(page:currentPage, pageSize:pageSize);
+      shoes = await _apiService.getShoeFavorites(page:currentPage, pageSize:pageSize);
 
       isLastPage = shoes.length < pageSize;
 

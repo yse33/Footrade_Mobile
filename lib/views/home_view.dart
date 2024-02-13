@@ -5,7 +5,9 @@ import '../components/custom_nav_bar.dart';
 import '../components/custom_search_delegate.dart';
 import '../view_models/home_view_model.dart';
 import '../view_models/shoe_preference_view_model.dart';
+import '../view_models/shoe_favorite_view_model.dart';
 import 'shoe_preference_view.dart';
+import 'shoe_favorite_view.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_icons.dart';
 import '../constants/app_strings.dart';
@@ -13,12 +15,9 @@ import '../constants/app_strings.dart';
 class HomeView extends StatelessWidget {
   HomeView({super.key});
 
-  // TODO: Add pages when implemented
   final List<Widget> _pages = [
     const ShoePreferenceView(),
-    Container(
-      color: Colors.green,
-    ),
+    const ShoeFavoriteView(),
   ];
 
   @override
@@ -30,6 +29,9 @@ class HomeView extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => ShoePreferenceViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ShoeFavoriteViewModel(),
         ),
       ],
       child: Consumer<HomeViewModel>(

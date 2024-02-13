@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../view_models/shoe_preference_view_model.dart';
 import '../constants/app_icons.dart';
 
 class CustomPaginationWidget extends StatelessWidget {
-  final ShoePreferenceViewModel viewModel;
+  final dynamic viewModel;
 
   const CustomPaginationWidget({
     Key? key,
@@ -19,7 +18,7 @@ class CustomPaginationWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Visibility(
-            visible: viewModel.currentPage > 1,
+            visible: viewModel.currentPage > 0,
             child: IconButton(
               icon: const Icon(AppIcons.arrowBack),
               onPressed: () {
@@ -31,7 +30,7 @@ class CustomPaginationWidget extends StatelessWidget {
           const SizedBox(width: 10),
 
           Text(
-            'Page ${viewModel.currentPage}',
+            'Page ${viewModel.currentPage + 1}',
             style: const TextStyle(fontSize: 16),
           ),
 

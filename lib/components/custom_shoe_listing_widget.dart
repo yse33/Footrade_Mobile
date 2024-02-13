@@ -3,12 +3,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:provider/provider.dart';
 
 import '../view_models/shoe_listing_view_model.dart';
-import '../models/shoe_preference_model.dart';
+import '../models/shoe_listing_model.dart';
 import '../constants/app_icons.dart';
 import '../constants/app_colors.dart';
 
 class CustomShoeListingWidget extends StatelessWidget {
-  final List<ShoePreferenceModel> shoes;
+  final List<ShoeListingModel> shoes;
   final String sasToken;
   final void Function(String) onItemClick;
 
@@ -32,7 +32,7 @@ class CustomShoeListingWidget extends StatelessWidget {
               mainAxisSpacing: 4.0,
               childAspectRatio: 0.6,
               children: List.generate(shoes.length, (index) {
-                final ShoePreferenceModel shoe = shoes[index];
+                final ShoeListingModel shoe = shoes[index];
                 return GestureDetector(
                   onTap: () {
                     onItemClick(shoe.id);
