@@ -19,7 +19,7 @@ class ShoeSearchModel {
       model: json['model'] ?? '',
       brand: json['brand'] ?? '',
       image: json['initialImage'] ?? '',
-      isFavorite: json['favorite'] ?? false,
+      isFavorite: json['isFavorite'] ?? false,
     );
   }
 }

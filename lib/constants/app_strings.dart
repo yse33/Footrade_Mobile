@@ -65,6 +65,7 @@ class AppStrings {
 
   // Shoe favorites
   static const String shoeFavoritesEmpty = 'You have no favorite shoes';
+  static const String shoeNotOnSale = 'Not on sale';
 
   // API Service Errors
   static const String tokenNotFound = 'Token not found';

@@ -9,7 +9,6 @@ class ShoeDetailModel {
   final String provider;
   final String url;
   final List<String> images;
-  bool isFavorite;
 
   ShoeDetailModel({
     required this.id,
@@ -22,7 +21,6 @@ class ShoeDetailModel {
     required this.provider,
     required this.url,
     required this.images,
-    required this.isFavorite,
   });
 
   factory ShoeDetailModel.fromJson(Map<String, dynamic> json) {
@@ -37,7 +35,6 @@ class ShoeDetailModel {
       provider: json['provider'] ?? '',
       url: json['url'] ?? '',
       images: (json['images'] as List<dynamic>?)?.cast<String>() ?? [],
-      isFavorite: json['favorite'] ?? false,
     );
   }
 }

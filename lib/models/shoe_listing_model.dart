@@ -25,7 +25,7 @@ class ShoeListingModel {
       newPrice: json['newPrice'] ?? 0.0,
       oldPrice: json['oldPrice'] ?? 0.0,
       image: json['initialImage'] ?? '',
-      isFavorite: json['favorite'] ?? false,
+      isFavorite: json['isFavorite'] ?? false,
     );
   }
 }
