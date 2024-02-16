@@ -3,12 +3,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:provider/provider.dart';
 
 import '../view_models/shoe_listing_view_model.dart';
-import '../models/shoe_preference_model.dart';
+import '../models/shoe_listing_model.dart';
 import '../constants/app_icons.dart';
 import '../constants/app_colors.dart';
+import '../constants/app_strings.dart';
 
 class CustomShoeListingWidget extends StatelessWidget {
-  final List<ShoePreferenceModel> shoes;
+  final List<ShoeListingModel> shoes;
   final String sasToken;
   final void Function(String) onItemClick;
 
@@ -32,7 +33,7 @@ class CustomShoeListingWidget extends StatelessWidget {
               mainAxisSpacing: 4.0,
               childAspectRatio: 0.6,
               children: List.generate(shoes.length, (index) {
-                final ShoePreferenceModel shoe = shoes[index];
+                final ShoeListingModel shoe = shoes[index];
                 return GestureDetector(
                   onTap: () {
                     onItemClick(shoe.id);
@@ -78,26 +79,44 @@ class CustomShoeListingWidget extends StatelessWidget {
                                     ),
                                   ),
                                   const SizedBox(height: 4),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        '${shoe.newPrice}лв.',
-                                        style: const TextStyle(
-                                          fontSize: 18,
-                                          color: AppColors.red,
+                                  Visibility(
+                                    visible: shoe.newPrice != 0.0,
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          '${shoe.newPrice}лв.',
+                                          style: const TextStyle(
+                                            fontSize: 18,
+                                            color: AppColors.red,
+                                          ),
                                         ),
-                                      ),
-                                      Text(
-                                        '${shoe.oldPrice}лв.',
-                                        style: const TextStyle(
-                                          fontSize: 14,
-                                          color: AppColors.grey,
-                                          decoration: TextDecoration.lineThrough,
+                                        Text(
+                                          '${shoe.oldPrice}лв.',
+                                          style: const TextStyle(
+                                            fontSize: 14,
+                                            color: AppColors.grey,
+                                            decoration: TextDecoration.lineThrough,
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
+                                  Visibility(
+                                    visible: shoe.newPrice == 0.0,
+                                    child: const Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          AppStrings.shoeNotOnSale,
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            color: AppColors.grey,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
                                 ],
                               ),
                             ),

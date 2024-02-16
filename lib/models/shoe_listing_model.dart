@@ -1,4 +1,4 @@
-class ShoePreferenceModel {
+class ShoeListingModel {
   final String id;
   final String model;
   final String brand;
@@ -7,7 +7,7 @@ class ShoePreferenceModel {
   final String image;
   bool isFavorite;
 
-  ShoePreferenceModel({
+  ShoeListingModel({
     required this.id,
     required this.model,
     required this.brand,
@@ -17,15 +17,15 @@ class ShoePreferenceModel {
     required this.isFavorite,
   });
 
-  factory ShoePreferenceModel.fromJson(Map<String, dynamic> json) {
-    return ShoePreferenceModel(
+  factory ShoeListingModel.fromJson(Map<String, dynamic> json) {
+    return ShoeListingModel(
       id: json['id'] ?? '',
       model: json['model'] ?? '',
       brand: json['brand'] ?? '',
       newPrice: json['newPrice'] ?? 0.0,
       oldPrice: json['oldPrice'] ?? 0.0,
       image: json['initialImage'] ?? '',
-      isFavorite: json['favorite'] ?? false,
+      isFavorite: json['isFavorite'] ?? false,
     );
   }
 }
