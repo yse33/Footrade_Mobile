@@ -116,9 +116,10 @@ class PreferenceView extends StatelessWidget {
   Future<void> _savePreferences(BuildContext context, PreferenceViewModel viewModel) async {
     try {
       await viewModel.savePreferences();
-    } catch (e) {
-      if (!context.mounted) return;
 
+      if (!context.mounted) return;
+      Navigator.pushNamed(context, 'home');
+    } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         CustomWarningSnackbar(message: e.toString().replaceAll('Exception: ', '')),
       );

@@ -79,4 +79,5 @@ class AppStrings {
   static const String failedGetShoePreferences = 'Failed to get shoes for user';
   static const String failedGetShoeDetail = 'Failed to get shoe detail';
   static const String failedGetShoeFavorites = 'Failed to get favorite shoes';
+  static const String failedSaveDeviceToken = 'Failed to save device token';
 }
