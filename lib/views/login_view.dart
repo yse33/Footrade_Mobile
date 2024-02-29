@@ -57,7 +57,7 @@ class LoginView extends StatelessWidget {
                         CustomTextField(
                           controller: viewModel.usernameController,
                           labelText: AppStrings.usernameLabel,
-                          prefixIcon: AppIcons.username,
+                          prefixIcon: AppIcons.user,
                           obscureText: false,
                           validator: viewModel.validateUsername,
                           onPressed: null,
@@ -72,20 +72,6 @@ class LoginView extends StatelessWidget {
                           obscureText: viewModel.obscurePassword,
                           validator: viewModel.validatePassword,
                           onPressed: viewModel.togglePasswordVisibility,
-                        ),
-
-                        AppDimensions.sizedBoxH10,
-
-                        InkWell(
-                          onTap: () {
-                            // TODO: Implement forgot password
-                          },
-                          child: const Text(
-                            AppStrings.forgotPassword,
-                            style: TextStyle(
-                              color: AppColors.grey,
-                            ),
-                          ),
                         ),
 
                         AppDimensions.sizedBoxH25,

@@ -57,7 +57,7 @@ class RegisterView extends StatelessWidget {
                         CustomTextField(
                           controller: viewModel.usernameController,
                           labelText: AppStrings.usernameLabel,
-                          prefixIcon: AppIcons.username,
+                          prefixIcon: AppIcons.user,
                           obscureText: false,
                           validator: viewModel.validateUsername,
                           onPressed: null,

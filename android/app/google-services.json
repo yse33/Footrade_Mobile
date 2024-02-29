@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "436450306918",
+    "project_id": "footrade-flutter",
+    "storage_bucket": "footrade-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:436450306918:android:0acf4bf19e78a0642c76a7",
+        "android_client_info": {
+          "package_name": "com.example.footrade_mvvm"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAq5gSbzLeGG5VBDSQOS83d6kJNwLgqgL0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -45,13 +45,11 @@ class RegisterViewModel extends ChangeNotifier {
       );
 
       await _storageService.storeToken(userModel.token);
-      await _storageService.storeUsername(userModel.username);
+
+      await _apiService.saveUserDeviceToken();
 
       if (userModel.hasPreference) {
-        // Redirect to the home page
-        // navigateTo('home');
-        // For testing purposes, just print the user's hasPreference value
-        print(userModel.hasPreference);
+        navigateTo('home');
       } else {
         navigateTo('preference');
       }
