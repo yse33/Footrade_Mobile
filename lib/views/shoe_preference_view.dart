@@ -32,7 +32,7 @@ class _ShoePreferenceViewState extends State<ShoePreferenceView> {
     try {
       ShoeDetailModel shoe = await viewModel.onItemClick(id);
 
-      if(!context.mounted) return;
+      if(!mounted) return;
 
       Navigator.push(
         context,
@@ -68,18 +68,27 @@ class _ShoePreferenceViewState extends State<ShoePreferenceView> {
                 ),
               )
             else if (viewModel.shoes.isEmpty)
-                const Center(
-                  child: Text(AppStrings.shoePreferencesEmpty),
-                )
-              else
-                CustomShoeListingWidget(
-                  shoes: viewModel.shoes,
-                  sasToken: viewModel.sasToken,
-                  onItemClick: (String id) => _onItemClick(id),
+              const Center(
+                child: Text(
+                  AppStrings.shoePreferencesEmpty,
+                  style: TextStyle(
+                    fontSize: 20
+                  ),
                 ),
-            CustomPaginationWidget(
-              viewModel: viewModel,
+              )
+            else
+              CustomShoeListingWidget(
+                shoes: viewModel.shoes,
+                sasToken: viewModel.sasToken,
+                onItemClick: (String id) => _onItemClick(id),
+              ),
+            Visibility(
+              visible: viewModel.shoes.isNotEmpty,
+              child: CustomPaginationWidget(
+                viewModel: viewModel,
+              ),
             ),
+
           ],
         );
       },

@@ -10,13 +10,12 @@ class AppStrings {
   static const String promptLogin = 'Already have an account?';
   static const String registerText = 'Register now';
   static const String loginText = 'Log in';
-  static const String forgotPassword = 'Forgot password?';
   static const String usernameEmpty = 'Please enter your username';
   static const String emailEmpty = 'Please enter your email';
   static const String passwordEmpty = 'Please enter your password';
   static const String passwordRepeatEmpty = 'Please repeat your password';
   static const String passwordMismatch = 'Passwords do not match';
-  static const String snackbarErrorTitle = 'Oh no! Something went wrong';
+  static const String snackbarErrorTitle = 'Oh no!';
 
   // Preference
   static const String sizeDialogTitle = 'Sizes';

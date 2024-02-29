@@ -15,6 +15,5 @@ class HomeViewModel extends ChangeNotifier {
 
   Future<void> logoutUser() async {
     await _storageService.deleteToken();
-    await _storageService.deleteUsername();
   }
 }

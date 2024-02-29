@@ -72,18 +72,11 @@ class ApiService {
       throw Exception(AppStrings.tokenNotFound);
     }
 
-    final username = await _storageService.getUsername();
-
-    if (username == null) {
-      throw Exception(AppStrings.usernameNotFound);
-    }
-
     final deviceToken = await _notificationService.getToken();
 
     final response = await http.put(
-      Uri.parse('$_baseUrl/api/v1/auth/device')
+      Uri.parse('$_baseUrl/api/v1/users/device-token')
           .replace(queryParameters: {
-        'username': username,
         'deviceToken': deviceToken,
       }),
       headers: <String, String>{
@@ -103,16 +96,9 @@ class ApiService {
       throw Exception(AppStrings.tokenNotFound);
     }
 
-    final username = await _storageService.getUsername();
-
-    if (username == null) {
-      throw Exception(AppStrings.usernameNotFound);
-    }
-
     final response = await http.put(
-      Uri.parse('$_baseUrl/api/v1/auth/preference')
+      Uri.parse('$_baseUrl/api/v1/users/preference')
         .replace(queryParameters: {
-          'username': username,
           'brands': brands.join(','),
           'sizes': sizes.join(','),
         }),
@@ -136,17 +122,10 @@ class ApiService {
       throw Exception(AppStrings.tokenNotFound);
     }
 
-    final username = await _storageService.getUsername();
-
-    if (username == null) {
-      throw Exception(AppStrings.usernameNotFound);
-    }
-
     final response = await http.get(
       Uri.parse('$_baseUrl/api/v1/shoes/search')
         .replace(queryParameters: {
           'query': query,
-          'username': username,
         }),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
@@ -195,16 +174,9 @@ class ApiService {
       throw Exception(AppStrings.tokenNotFound);
     }
 
-    final username = await _storageService.getUsername();
-
-    if (username == null) {
-      throw Exception(AppStrings.usernameNotFound);
-    }
-
     final response = await http.put(
-      Uri.parse('$_baseUrl/api/v1/auth/favorite')
+      Uri.parse('$_baseUrl/api/v1/users/favorite')
         .replace(queryParameters: {
-          'username': username,
           'id': shoeId,
         }),
         headers: <String, String>{
@@ -224,14 +196,8 @@ class ApiService {
       throw Exception(AppStrings.tokenNotFound);
     }
 
-    final username = await _storageService.getUsername();
-
-    if (username == null) {
-      throw Exception(AppStrings.usernameNotFound);
-    }
-
     final response = await http.get(
-      Uri.parse('$_baseUrl/api/v1/shoes/user/$username')
+      Uri.parse('$_baseUrl/api/v1/shoes/preferences')
         .replace(queryParameters: {
           'page': page.toString(),
           'pageSize': pageSize.toString(),
@@ -257,14 +223,8 @@ class ApiService {
       throw Exception(AppStrings.tokenNotFound);
     }
 
-    final username = await _storageService.getUsername();
-
-    if (username == null) {
-      throw Exception(AppStrings.usernameNotFound);
-    }
-
     final response = await http.get(
-      Uri.parse('$_baseUrl/api/v1/shoes/favorite/$username')
+      Uri.parse('$_baseUrl/api/v1/shoes/favorites')
         .replace(queryParameters: {
           'page': page.toString(),
           'pageSize': pageSize.toString(),

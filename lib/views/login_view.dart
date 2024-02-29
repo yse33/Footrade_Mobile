@@ -74,20 +74,6 @@ class LoginView extends StatelessWidget {
                           onPressed: viewModel.togglePasswordVisibility,
                         ),
 
-                        AppDimensions.sizedBoxH10,
-
-                        InkWell(
-                          onTap: () {
-                            // TODO: Implement forgot password
-                          },
-                          child: const Text(
-                            AppStrings.forgotPassword,
-                            style: TextStyle(
-                              color: AppColors.grey,
-                            ),
-                          ),
-                        ),
-
                         AppDimensions.sizedBoxH25,
 
                         CustomButton(
